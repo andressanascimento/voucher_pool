@@ -43,25 +43,27 @@ php -S localhost:8000 -t public
 
 ## Examples of routes use
 Disclaimer:
+
 Its very important to know that this project uses email in querystring params for routes. There is a bug in the php server embedded when used with parameters that have "dot" as is the case of emails.
 (https://bugs.php.net/bug.php?id=61286)
 For this reason when using with the php server built-in, it is necessary to add index.php to url. This bug does not happen with apache or ngix as would be the case in a production environment. The examples are as development environment.
 
-### Create a recipient
+### Create a recipient (customer)
 POST http://localhost:8000/index.php/recipient
 ```javascript
 {
-	"name": "Foobar",
+    "name": "Foobar",
     "email": "foobar@teste.com"
 }
 ```
 
-### Find a recipient
+### Find a recipient (customer)
 
 GET http://localhost:8000/index.php/recipient/{email}
 
 ### Create a offer
 When a offer is created this route also generate the vouchers to all recipients.
+
 POST http://localhost:8000/index.php/special-offer
 ```javascript
 {
