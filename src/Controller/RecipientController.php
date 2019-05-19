@@ -22,7 +22,7 @@ class RecipientController {
 
     public function find(Request $request, Response $response, $args)
     {
-        $recipient = $this->_repository->find($args['slug']);
+        $recipient = $this->_repository->find($args['email']);
         if ($recipient) {
             return $response->withJson($recipient->toArray());
         }
