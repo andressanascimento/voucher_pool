@@ -27,6 +27,12 @@ class VoucherRepository extends AbstractResource
         return $vouchers_list;
     }
 
+    public function find($code)
+    {
+        $voucher = $this->_entityManager->getRepository(Voucher::class)->findOneBy(["code" => $code]);
+        return $voucher;
+    }
+
     public function validate($code, $email)
     {
         $voucher = $this->_entityManager->getRepository(Voucher::class)

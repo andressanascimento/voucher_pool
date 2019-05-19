@@ -15,6 +15,16 @@ class VoucherController {
         $this->_repository = $repository;
     }
 
+    public function find(Request $request, Response $response, $args)
+    {
+        $voucher = $this->_repository->find($args['code']);
+        if ($voucher) {
+            return $response->withJson($voucher->toArray())->withStatus(200);
+        }
+        return $response->withJson(["message"=>"No voucher found"])
+                        ->withStatus(404);
+    }
+
     public function search(Request $request, Response $response, $args)
     {
         $vouchers = $this->_repository->search($args['email']);

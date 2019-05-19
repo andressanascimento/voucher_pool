@@ -127,7 +127,8 @@ class Voucher
     {
         return [
             "code" => $this->getCode(),
-            "offer" => $this->getSpecialOffer()->getName()
+            "offer" => $this->getSpecialOffer()->getName(),
+            "date_used" => !is_null($this->getDateUsed()) ? $this->getDateUsed() : "Not used"
         ];
     }
 }
