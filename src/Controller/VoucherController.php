@@ -29,7 +29,7 @@ class VoucherController {
     {
         $vouchers = $this->_repository->search($args['email']);
         if ($vouchers) {
-            return $response->withJson($vouchers);
+            return $response->withJson($vouchers->toArray());
         }
         return $response->withJson(["message"=>"No voucher found"])
                         ->withStatus(404);
@@ -38,11 +38,11 @@ class VoucherController {
     public function validate(Request $request, Response $response, $args)
     {
         $voucher = $this->_repository->validate($args['code'],$args['email']);
-        $discount = $voucher->getDiscount() * 100;
         if ($voucher) {
+            $discount = $voucher->getDiscount() * 100;
             return $response->withJson(["message" =>"Your discount: ".$discount."%"]);
         }
-        return $response->withJson("No voucher found")
+        return $response->withJson(["message"=>"No voucher found"])
                         ->withStatus(404);
     }
 }

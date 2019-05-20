@@ -67,7 +67,7 @@ When a offer is created this route also generate the vouchers to all recipients.
 POST http://localhost:8000/index.php/special-offer
 ```javascript
 {
-	"name": "Oferta 54",
+	"name": "Promo 54",
 	"discount": 0.2,
 	"expire_date": "2019-05-25"
 }
