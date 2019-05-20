@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Repository\RecipientRepository;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use \Respect\Validation\Exceptions\NestedValidationException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use App\Validator\RecipientValidator;
 
@@ -26,7 +25,7 @@ class RecipientController {
         if ($recipient) {
             return $response->withJson($recipient->toArray());
         }
-        return $response->withJson("No recipient found with that slug.")
+        return $response->withJson(["message"=>"No recipient found with that email"])
                         ->withStatus(404);
     }
 
@@ -35,7 +34,7 @@ class RecipientController {
         $params = $request->getParams();
 
         if (!$this->_validator->assert($params)) {
-            $response->withJson($this->_validator->getErrors(), 400);
+            return $response->withJson($this->_validator->getErrors(), 400);
         }
 
         try {

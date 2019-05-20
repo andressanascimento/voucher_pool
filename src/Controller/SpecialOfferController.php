@@ -7,8 +7,6 @@ use App\Repository\VoucherRepository;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use App\Validator\SpecialOfferValidator;
-use Respect\Validation\Exceptions\Exception as RespectException;
-use Respect\Validation\Exceptions\NestedValidationException;
 
 
 class SpecialOfferController {
@@ -27,7 +25,7 @@ class SpecialOfferController {
         $params = $request->getParams();
 
         if (!$this->_validator->assert($params)) {
-            $response->withJson($this->_validator->getErrors(), 400);
+            return $response->withJson($this->_validator->getErrors(), 400);
         }
 
         $special_offer = $this->_repository->create($params);

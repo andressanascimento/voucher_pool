@@ -73,4 +73,9 @@ class RecipientValidator
 
         return true;
     }
+
+    public function getErrors()
+    {
+        return $this->errors;
+    }
 }
